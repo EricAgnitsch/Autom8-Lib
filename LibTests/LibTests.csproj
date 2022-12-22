@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Lib\Lib.csproj" />
+      <ProjectReference Include="..\Autom8.Lib\Autom8.Lib.csproj" />
     </ItemGroup>
 
 </Project>

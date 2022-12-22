@@ -1,15 +1,15 @@
 namespace Lib.Graphs.Weighted;
 
-public class WeightedGraph
+public class WeightedGraph<T> where T : Vertex
 {
-    public List<Vertex> Vertices { get; set; } = new();
+    public List<T> Vertices { get; set; } = new();
 
-    public void AddVertex(Vertex vertex)
+    public void AddVertex(T vertex)
     {
         Vertices.Add(vertex);
     }
 
-    public Vertex FindVertex(int value)
+    public T FindVertex(int value)
     {
         return Vertices.FirstOrDefault(v => v.Value == value) ?? throw new Exception("Can't find Vertex.");
     }

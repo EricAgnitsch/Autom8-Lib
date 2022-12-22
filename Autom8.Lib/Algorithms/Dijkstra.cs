@@ -4,7 +4,7 @@ namespace Lib.Algorithms;
 
 public class Dijkstra
 {
-    public void Run(WeightedGraph graph, int source)
+    public IEnumerable<int> Run(WeightedGraph<DijkstraVertex> graph, int source)
     {
         var paths = Enumerable.Repeat(0, graph.Vertices.Count).ToList();
 
@@ -18,21 +18,23 @@ public class Dijkstra
                 .First();
             minDistanceVertex.Visited = true;
 
-            Console.WriteLine("Min Vertex: " + minDistanceVertex.Value);
+            // Console.WriteLine("Min Vertex: " + minDistanceVertex.Value);
 
             foreach (var edge in minDistanceVertex.Edges.Where(e => graph.FindVertex(e.Target).Visited == false))
             {
                 var tempDistance = minDistanceVertex.DistanceFromSource + edge.Weight;
-                Console.WriteLine($"\tAnalyzing edge {edge.Target} with tempDistance {tempDistance}");
+                // Console.WriteLine($"\tAnalyzing edge {edge.Target} with tempDistance {tempDistance}");
 
                 if (tempDistance < graph.FindVertex(edge.Target).DistanceFromSource)
                 {
-                    Console.WriteLine($"\t\tEdge distance is less than {graph.FindVertex(edge.Target).DistanceFromSource}. Added {minDistanceVertex.Value} to path in {edge.Target}.");
+                    // Console.WriteLine($"\t\tEdge distance is less than {graph.FindVertex(edge.Target).DistanceFromSource}. Added {minDistanceVertex.Value} to path in {edge.Target}.");
                     graph.FindVertex(edge.Target).DistanceFromSource = tempDistance;
                     paths[edge.Target] = minDistanceVertex.Value;
                 }
             }
         }
-        Console.WriteLine("Path: [" + string.Join(", ", paths) + "]");
+        // Console.WriteLine("Path: [" + string.Join(", ", paths) + "]");
+
+        return paths;
     }
 }

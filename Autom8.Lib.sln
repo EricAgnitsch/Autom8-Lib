@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib\Lib.csproj", "{D5F4AEF7-C22A-4E67-9EE1-239399D0DD78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autom8.Lib", "Autom8.Lib\Autom8.Lib.csproj", "{D5F4AEF7-C22A-4E67-9EE1-239399D0DD78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibTests", "LibTests\LibTests.csproj", "{66735DA9-DD1B-4955-B8B8-936595D8C6CD}"
 EndProject
