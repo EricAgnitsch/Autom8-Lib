@@ -6,7 +6,7 @@ public class Dijkstra
 {
     public IEnumerable<int> Run(WeightedGraph<DijkstraVertex> graph, int source)
     {
-        var paths = Enumerable.Repeat(0, graph.Vertices.Count).ToList();
+        var paths = Enumerable.Repeat(-1, graph.Vertices.Count).ToList();
 
         graph.FindVertex(source).DistanceFromSource = 0;
         
@@ -27,7 +27,7 @@ public class Dijkstra
 
                 if (tempDistance < graph.FindVertex(edge.Target).DistanceFromSource)
                 {
-                    // Console.WriteLine($"\t\tEdge distance is less than {graph.FindVertex(edge.Target).DistanceFromSource}. Added {minDistanceVertex.Value} to path in {edge.Target}.");
+                    // Console.WriteLine($"\t\tEdge distance ({tempDistance}) is less than {graph.FindVertex(edge.Target).DistanceFromSource}. Added {minDistanceVertex.Value} to path in {edge.Target}.");
                     graph.FindVertex(edge.Target).DistanceFromSource = tempDistance;
                     paths[edge.Target] = minDistanceVertex.Value;
                 }

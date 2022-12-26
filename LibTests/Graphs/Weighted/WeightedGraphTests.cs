@@ -54,8 +54,8 @@ public class WeightedGraphTests
         var paths = new Dijkstra().Run(graph, 0);
 
         paths.Should().BeEquivalentTo(new List<int>
-        {
-            0, 0, 0, 2, 2, 4
-        });
+        { 
+            -1, 0, 0, 2, 2, 4
+        }, options => options.WithStrictOrdering());
     }
 }
