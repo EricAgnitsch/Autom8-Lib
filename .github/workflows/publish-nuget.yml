@@ -24,14 +24,7 @@ jobs:
           cd Autom8.Lib
           dotnet build --configuration Release
           dotnet pack -c Release
-      
-      - name: Test
-        run: |
-          cd Autom8.Lib
-          cd bin
-          cd Release
-          ls
 
       - name: Publish Nuget Package to GitHub Packages
         run: |
-          dotnet nuget push "**/*.nupkg" --api-key "${{secrets.GH_PACKAGE_PAT}}" --skip-duplicate --no-symbols true
+          dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols true
