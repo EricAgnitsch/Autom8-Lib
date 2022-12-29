@@ -22,6 +22,7 @@ jobs:
       - name: Build and Generate Nuget package
         run: |
           cd Autom8.Lib
+          dotnet build --configuration Release
           dotnet pack -c Release -o out
 
       - name: Publish Nuget Package to GitHub Packages
