@@ -22,8 +22,12 @@ jobs:
       - name: Build and Generate Nuget package
         run: |
           cd Autom8.Lib
-          dotnet build --configuration Release /p:Version=1.0.${{github.event.number}}
+          dotnet build --configuration Release /p:Version=1.0.${{github.run_number}}
           dotnet pack -c Release
+          
+      - name: Test ref
+        run: |
+          echo ${{github.ref}}
 
       - name: Publish Nuget Package to GitHub Packages
         run: |
