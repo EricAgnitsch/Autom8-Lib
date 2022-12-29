@@ -1,5 +1,9 @@
 name: Publish to GitHub Packagess
 
+on:
+  pull_request:
+    branches: [ master ]
+
 jobs:
   build-and-publish:
     runs-on: windows-latest
