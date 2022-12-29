@@ -1,4 +1,4 @@
-name: Publish GitHub Nuget package
+name: Publish to GitHub Packages
 
 on:
   push:
@@ -11,23 +11,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
-      #        https://stackoverflow.com/a/58025355/14189385
+      # https://stackoverflow.com/a/58025355/14189385
       - name: Setup .NET Core @ Latest
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3.0.3
         with:
           source-url: https://nuget.pkg.github.com/EricAgnitsch/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GH_PACKAGE_PAT}}
-
+      
+      # https://acraven.medium.com/a-nuget-package-workflow-using-github-actions-7da8c6557863
       - name: Build and Generate Nuget package
         run: |
           cd Autom8.Lib
-          dotnet build --configuration Release /p:Version=1.0.${{github.run_number}}
-          dotnet pack -c Release
-          
-      - name: Test ref
-        run: |
-          echo ${{github.ref}}
+          dotnet build -c Release /p:Version=1.0.${{github.run_number}}
+          dotnet pack -c Release /p:Version=1.0.${{github.run_number}} --no-build 
 
       - name: Publish Nuget Package to GitHub Packages
         run: |
