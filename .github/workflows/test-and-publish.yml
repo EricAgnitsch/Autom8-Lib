@@ -1,11 +1,11 @@
-name: Publish to GitHub Packages
+name: Unit Tests & Publish to GitHub Packages
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  build-and-publish:
+  test-and-publish:
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -18,13 +18,17 @@ jobs:
           source-url: https://nuget.pkg.github.com/EricAgnitsch/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GH_PACKAGE_PAT}}
+
+      - name: Run Unit Tests
+        run: |
+          dotnet test Autom8.Lib.Tests/Autom8.Lib.Tests.csproj
       
       # https://acraven.medium.com/a-nuget-package-workflow-using-github-actions-7da8c6557863
       - name: Build and Generate Nuget package
         run: |
           cd Autom8.Lib
           dotnet build -c Release /p:Version=1.0.${{github.run_number}}
-          dotnet pack -c Release /p:Version=1.0.${{github.run_number}} --no-build 
+          dotnet pack -c Release /p:Version=1.0.${{github.run_number}} --no-build
 
       - name: Publish Nuget Package to GitHub Packages
         run: |
