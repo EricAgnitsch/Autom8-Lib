@@ -27,4 +27,4 @@ jobs:
 
       - name: Publish Nuget Package to GitHub Packages
         run: |
-          dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols true
+          dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols
