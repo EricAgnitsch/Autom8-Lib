@@ -10,14 +10,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+      
+      #        https://stackoverflow.com/a/58025355/14189385
+      - name: Setup .NET Core @ Latest
+        uses: actions/setup-dotnet@v1
+        with:
+          source-url: https://nuget.pkg.github.com/EricAgnitsch/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GH_PACKAGE_PAT}}
+
       - name: Build and Generate Nuget package
         run: |
+          cd Autom8.Lib
           dotnet pack -c Release -o out
-          
-      - name: Add private GitHub registry to NuGet
-        run: dotnet nuget add source "https://nuget.pkg.github.com/EricAgnitsch/index.json" --name "githubfeed" --username "ericagnitsch.dev@gmail.com" --password "${{secrets.GH_PACKAGE_PAT}}" --store-password-in-clear-text
-        
+
       - name: Publish Nuget Package to GitHub Packages
         run: |
-          dotnet nuget push "bin/Debug/Autom8.Lib.1.0.0.nupkg" --api-key "${{secrets.GH_PACKAGE_PAT}}" --source "githubfeed"
+          dotnet nuget push "./Autom8.Lib/out/*.nupkg" --api-key "${{secrets.GH_PACKAGE_PAT}}" --source "githubfeed"
