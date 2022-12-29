@@ -27,6 +27,7 @@ jobs:
       
       - name: Test
         run: |
+          cd Autom8.Lib
           ls
 
       - name: Publish Nuget Package to GitHub Packages
